@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Content Summarizer</title>
+    <script type="module" src="/src/main.jsx"></script>
+  </head>
+  <body class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600">
+    <div class="bg-white/90 backdrop-blur-md shadow-2xl rounded-2xl p-10 max-w-2xl w-full text-center border border-blue-200">
+      <!-- Title -->
+      <h1 class="text-4xl font-bold text-blue-700 mb-6">AI Content Summarizer</h1>
+
+      <!-- Input Box -->
+      <textarea
+        id="inputText"
+        rows="6"
+        placeholder="Enter text to summarize..."
+        class="w-full p-4 border border-blue-300 rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 font-serif"
+      ></textarea>
+
+      <!-- Button -->
+      <button
+        onclick="summarizeText()"
+        class="mt-5 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white text-lg font-semibold rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl"
+      >
+        Summarize
+      </button>
+
+      <!-- Output Box -->
+      <div
+        id="summary"
+        class="mt-8 p-5 bg-gradient-to-r from-blue-100 to-blue-200 rounded-xl shadow-md border border-blue-300 hidden text-left font-serif"
+      ></div>
+    </div>
+
+    <!-- Script -->
+    <script>
+      async function summarizeText() {
+        const inputText = document.getElementById("inputText").value;
+        if (!inputText.trim()) {
+          alert("Please enter some text to summarize.");
+          return;
+        }
+
+        const response = await fetch("http://127.0.0.1:8000/api/summarize", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: inputText }),
+        });
+
+        const data = await response.json();
+        const summaryBox = document.getElementById("summary");
+        summaryBox.classList.remove("hidden");
+        summaryBox.innerText = data[0].summary_text;
+      }
+    </script>
+  </body>
+</html>

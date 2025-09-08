@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles */
+body {
+  font-family: "Times New Roman", Times, serif;
+  @apply bg-gradient-to-r from-purple-200 via-pink-100 to-blue-200 min-h-screen;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Times New Roman", Times, serif;
+  @apply font-bold;
+}
+
+/* Textarea styling */
+textarea {
+  @apply p-3 border border-gray-300 rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 w-full resize-none;
+  font-family: "Times New Roman", Times, serif;
+}
+
+/* Button styling */
+button {
+  @apply px-5 py-2 mt-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl;
+  font-family: "Times New Roman", Times, serif;
+}
+
+/* Summary box */
+#summary {
+  @apply mt-6 p-4 bg-white rounded-xl shadow-md border border-gray-200 animate-fade-in;
+  font-family: "Times New Roman", Times, serif;
+}
